@@ -28,20 +28,16 @@ class ProgectGalController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'name' => 'required',
-            'description' => 'required'
-        ]);
-    
-        return ProgectGal::create($request->all());
+        $progectGal = ProgectGal::create($request->all());
+        return $progectGal;
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(ProgectGal $progectGal)
+    public function show(ProgectGal $progectGal, $id)
     {
-        return $progectGal;
+        return ProgectGal::findOrFail($id);
     }
 
     /**
@@ -55,25 +51,21 @@ class ProgectGalController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, ProgectGal $progectGal)
+    public function update(Request $request, ProgectGal $progectGal, $id)
     {
-        $request->validate([
-            'name' => 'required',
-            'description' => 'required',
-        ]);
-    
+        $progectGal = ProgectGal::findOrFail($id);
         $progectGal->update($request->all());
-    
+        
         return $progectGal;
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(ProgectGal $progectGal)
+    public function destroy(ProgectGal $progectGal, $id)
     {
+        $progectGal = ProgectGal::findOrFail($id);
         $progectGal->delete();
-        
-        return response()->json(['message' => 'Project deleted successfully']);
+        return '';
     }
 }

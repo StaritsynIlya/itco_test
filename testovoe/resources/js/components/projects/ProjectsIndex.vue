@@ -1,28 +1,30 @@
 <template>
-    <div>
-        <table class="table">
-            <thead>
-              <tr>
-                <th scope="col">Name</th>
-                <th scope="col">Description</th>
-                <th scope="col">Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-                <tr v-for="project in projects" :key="project.id">
-                    <td>{{ project.name }}</td>
-                    <td>{{ project.description }}</td>
-                    <td>
-                      <div class="row gap-3">
-
-                        <router-link :to="`/projectgal/${project.id}/edit`" class="p-2 col border btn btn-success">Edit</router-link>
-                        <button @click="deleteProject(project.id)" type="button" class="p-2 col border btn btn-danger">Delete</button>
-                      </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+  <div>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">Description</th>
+          <th scope="col">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="project in projects" :key="project.id">
+          <td>{{ project.name }}</td>
+          <td>{{ project.description }}</td>
+          <td>
+            <div class="row gap-3">
+              <router-link :to="{ name: 'ProjectsCreate', params: { id: project.id } }" class="p-2 col border btn btn-success">
+                Edit
+              </router-link>
+              <button @click="deleteProject(project.id)" type="button"
+                class="p-2 col border btn btn-danger">Delete</button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </template>
 
 <script>
@@ -31,7 +33,7 @@ import axios from 'axios';
 export default {
   data() {
     return {
-        projects: []
+      projects: []
     }
   },
   async created() {
