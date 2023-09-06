@@ -6,25 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>ItCo - тестовое задание</title>
-
+    <link rel="stylesheet" href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap">
+    <link href="https://getbootstrap.com/docs/5.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    @vite(['resources/js/app.js'])
 </head>
 
 <body>
-    <p>Coming soon...</p>
-    @section('content')
-    <div class="container">
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2">
-                <div class="panel panel-default">
-                    <div class="panel-heading">Project</div>
-
-                    <div class="panel-body">
-                    </div>
-                </div>
-            </div>
-        </div>
+    <div id="app">
     </div>
-    @endsection
+
 </body>
 
 </html>

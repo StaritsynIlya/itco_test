@@ -5,7 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Project extends Model
+class ProgectGal extends Model
 {
-    protected $fillable = ['Наименование', 'Описание'];
+    use HasFactory;
+    protected $fillable = ['name', 'description',];
 }
