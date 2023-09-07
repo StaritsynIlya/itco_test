@@ -13,12 +13,14 @@
         <tr v-for="project in projects" :key="project.id">
           <td>{{ project.name }}</td>
           <td>{{ project.description }}</td>
-          <td> <img :src="project.photo"> </td>
+          <td> <img :src="project.photo" class="img-thumbnail"> </td>
           <td>
             <div class="row gap-3">
-              <router-link :to="{ name: 'ProjectsCreate', params: { id: project.id } }" class="p-2 col border btn btn-success">
+              <router-link :to="{ name: 'ProjectsCreate', params: { id: project.id } }"
+                class="p-2 col border btn btn-success">
                 Изменить
               </router-link>
+              <!-- <input type="checkbox" v-model="selectedItems[project.id]"> -->
               <button @click="deleteProject(project.id)" type="button"
                 class="p-2 col border btn btn-danger">Удалить</button>
             </div>

@@ -13,7 +13,7 @@
       </div>
       <div class="mb-3">
         <input type="file" accept="image/jpeg,image/png" @change="onFileChange">
-        <img v-if="project.photo" :src="project.photo" />
+        <img v-if="project.photo" :src="project.photo" class="img-thumbnail"/>
       </div>
       <div class="mb-3">
         <button v-if="project.photo" @click="removeImage" class="btn btn-danger">Удалить изображение</button>
