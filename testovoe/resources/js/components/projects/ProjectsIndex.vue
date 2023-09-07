@@ -5,6 +5,7 @@
         <tr>
           <th scope="col">Имя</th>
           <th scope="col">Описание</th>
+          <th scope="col">Фото</th>
           <th scope="col">Действия</th>
         </tr>
       </thead>
@@ -12,6 +13,7 @@
         <tr v-for="project in projects" :key="project.id">
           <td>{{ project.name }}</td>
           <td>{{ project.description }}</td>
+          <td> <img :src="project.photo"> </td>
           <td>
             <div class="row gap-3">
               <router-link :to="{ name: 'ProjectsCreate', params: { id: project.id } }" class="p-2 col border btn btn-success">

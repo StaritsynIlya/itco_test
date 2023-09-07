@@ -13,10 +13,10 @@
       </div>
       <div class="mb-3">
         <input type="file" accept="image/jpeg,image/png" @change="onFileChange">
-        <img v-if="image" :src="image" />
+        <img v-if="project.photo" :src="project.photo" />
       </div>
       <div class="mb-3">
-        <button v-if="image" @click="removeImage" class="btn btn-danger">Удалить изображение</button>
+        <button v-if="project.photo" @click="removeImage" class="btn btn-danger">Удалить изображение</button>
       </div>
       <button type="submit" v-if="isNewProject" class="btn btn-primary">Добавить</button>
       <button type="submit" v-else class="btn btn-primary">Обновить</button>
@@ -30,10 +30,10 @@ import axios from 'axios';
 export default {
   data() {
     return {
-      image: '',
       project: {
         name: '',
-        description: ''
+        description: '',
+        photo: ''
       }
     }
   },
@@ -56,12 +56,12 @@ export default {
     createImage(file) {
       const reader = new FileReader();
       reader.onload = (e) => {
-        this.image = e.target.result;
+        this.project.photo = e.target.result;
       };
       reader.readAsDataURL(file);
     },
     removeImage() {
-      this.image = '';
+      this.project.photo = '';
     },
     async submitForm() {
       try {
