@@ -60,8 +60,10 @@ export default {
   methods: {
     async deleteProject() {
       try {
+        if (confirm("Удалить выбранный проект?")) {
         await Promise.all(this.selectedItems.map(id => axios.delete(`/api/projectgal/${id}`)));
         this.projects = this.projects.filter(project => !this.selectedItems.includes(project.id));
+        }
       } catch (error) {
         console.error(error.response.data);
       }
