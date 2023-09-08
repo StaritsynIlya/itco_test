@@ -20,9 +20,9 @@
                 class="p-2 col border btn btn-success">
                 Изменить
               </router-link>
-              <!-- <input type="checkbox" v-model="selectedItems[project.id]"> -->
-              <button @click="deleteProject(project.id)" type="button"
-                class="p-2 col border btn btn-danger">Удалить</button>
+              <input type="checkbox" class="form-check-input" v-model="selectedItems" :value="project.id">
+              <!-- <button @click="deleteProject(project.id)" type="button"
+                class="p-2 col border btn btn-danger">Удалить</button> -->
             </div>
           </td>
         </tr>
@@ -37,28 +37,38 @@ import axios from 'axios';
 export default {
   data() {
     return {
-      projects: []
+      projects: [],
+      selectedItems: []
     }
   },
   async created() {
     try {
       const response = await axios.get('/api/projectgal');
-      this.projects = response.data;
+      if (response && response.data) {
+        this.projects = response.data;
+      }
+      this.$root.emitter.on('delete-items', this.deleteProject);
     } catch (error) {
       console.error(error.response.data);
     }
   },
+  watch: {
+    selectedItems() {
+      this.$emit('update:selectedItems', this.selectedItems);
+    }
+  },
   methods: {
-    async deleteProject(id) {
+    async deleteProject() {
       try {
-        if (confirm("Удалить выбранный проект?")) {
-        await axios.delete(`/api/projectgal/${id}`);
-        this.projects = this.projects.filter(project => project.id !== id);
-        }
+        await Promise.all(this.selectedItems.map(id => axios.delete(`/api/projectgal/${id}`)));
+        this.projects = this.projects.filter(project => !this.selectedItems.includes(project.id));
       } catch (error) {
         console.error(error.response.data);
       }
     }
+  },
+  beforeDestroy() {
+    this.$root.$off('delete-items', this.deleteProject);
   }
 }
 </script>
